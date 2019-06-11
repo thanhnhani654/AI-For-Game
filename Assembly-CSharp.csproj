@@ -11,7 +11,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{47319104-62FE-B681-43AE-304D602E67A8}</ProjectGuid>
+    <ProjectGuid>{0B54FF36-D1CA-8A8A-A21D-CF70E096EC4C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -96,7 +96,6 @@
     <Compile Include="Assets\Light2D\Scripts\Point2.cs" />
     <Compile Include="Assets\Light2D\Scripts\Util.cs" />
     <Compile Include="Assets\Script\A Star\Grid.cs" />
-    <Compile Include="Assets\Script\A Star\GridEditor.cs" />
     <Compile Include="Assets\Script\A Star\Node.cs" />
     <Compile Include="Assets\Script\AttachCamera.cs" />
     <Compile Include="Assets\Script\Bullet.cs" />
@@ -106,12 +105,10 @@
     <Compile Include="Assets\Script\Character\CharacterMovement.cs" />
     <Compile Include="Assets\Script\Character\GameHandler.cs" />
     <Compile Include="Assets\Script\FieldOfView.cs" />
-    <Compile Include="Assets\Script\FieldOfViewEditor.cs" />
     <Compile Include="Assets\Script\GameMaster\GameMaster.cs" />
     <Compile Include="Assets\Script\GameMaster\NPCManager.cs" />
     <Compile Include="Assets\Script\GameMaster\ScoreManager.cs" />
     <Compile Include="Assets\Script\GameMaster\Spawner.cs" />
-    <Compile Include="Assets\Script\GameMaster\SpawnerEditor.cs" />
     <Compile Include="Assets\Script\MenuScene\GlobalControl.cs" />
     <Compile Include="Assets\Script\MenuScene\MenuHandler.cs" />
     <Compile Include="Assets\Script\MenuScene\StartGame.cs" />
@@ -123,7 +120,6 @@
     <Compile Include="Assets\Script\NPC\NPCRotateToTarget.cs" />
     <Compile Include="Assets\Script\NPC\NPCSeparation.cs" />
     <Compile Include="Assets\Script\Weapon.cs" />
-    <Compile Include="Assets\Script\WeaponEditor.cs" />
     <Compile Include="Assets\Script\WinGameScene\WinScene.cs" />
     <None Include="Assets\Light2D\Resources\Shaders\FastBlur.shader" />
     <None Include="Assets\Scenes\TestLight\testt.shader" />
@@ -157,46 +153,46 @@
     <None Include="Assets\Light2D\Resources\Shaders\ObstacleTexturePostProcessor.shader" />
     <None Include="Assets\Light2D\Resources\Shaders\LightAuto.shader" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>E:/Project/Unity/DoAn Game/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>E:/Project/Unity/DoAn Game/AI-For-Game/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Editor">
-      <HintPath>E:/Project/Unity/DoAn Game/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
+      <HintPath>E:/Project/Unity/DoAn Game/AI-For-Game/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>E:/Project/Unity/DoAn Game/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>E:/Project/Unity/DoAn Game/AI-For-Game/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>E:/Project/Unity/DoAn Game/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>E:/Project/Unity/DoAn Game/AI-For-Game/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>E:/Project/Unity/DoAn Game/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>E:/Project/Unity/DoAn Game/AI-For-Game/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>E:/Project/Unity/DoAn Game/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>E:/Project/Unity/DoAn Game/AI-For-Game/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-weaver.Editor">
-      <HintPath>E:/Project/Unity/DoAn Game/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
+      <HintPath>E:/Project/Unity/DoAn Game/AI-For-Game/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-      <HintPath>E:/Project/Unity/DoAn Game/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>E:/Project/Unity/DoAn Game/AI-For-Game/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
-      <HintPath>E:/Project/Unity/DoAn Game/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+      <HintPath>E:/Project/Unity/DoAn Game/AI-For-Game/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>E:/Project/Unity/DoAn Game/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+      <HintPath>E:/Project/Unity/DoAn Game/AI-For-Game/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>E:/Project/Unity/DoAn Game/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>E:/Project/Unity/DoAn Game/AI-For-Game/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>E:/Project/Unity/DoAn Game/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>E:/Project/Unity/DoAn Game/AI-For-Game/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-      <HintPath>E:/Project/Unity/DoAn Game/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>E:/Project/Unity/DoAn Game/AI-For-Game/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Runtime">
-      <HintPath>E:/Project/Unity/DoAn Game/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+      <HintPath>E:/Project/Unity/DoAn Game/AI-For-Game/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -382,13 +378,13 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.1f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>E:/Project/Unity/DoAn Game/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>E:/Project/Unity/DoAn Game/AI-For-Game/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>E:/Project/Unity/DoAn Game/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>E:/Project/Unity/DoAn Game/AI-For-Game/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>E:/Project/Unity/DoAn Game/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>E:/Project/Unity/DoAn Game/AI-For-Game/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.1f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

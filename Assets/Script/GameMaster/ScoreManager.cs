@@ -15,6 +15,7 @@ public class ScoreManager : MonoBehaviour
     public GameObject ScoreMenu;
     public GameObject NPChandler;
     public GameObject ScoreDisplayer;
+    public GameObject character;
 
     bool bDisable = true;
     bool bLoadlist = false;
@@ -34,27 +35,45 @@ public class ScoreManager : MonoBehaviour
 
     public void LoadList()
     {
+        Debug.Log(NPChandler.GetComponent<NPCManager>().listNPCs.Count);
         for (int i = 0; i < NPChandler.GetComponent<NPCManager>().listNPCs.Count; i++)
         {           
             if (NPChandler.GetComponent<NPCManager>().listNPCs[i].GetComponent<Attribute>().Team == Attribute.eTeam.Team1)
             {
                 listTeam1.Add(NPChandler.GetComponent<NPCManager>().listNPCs[i]);
-                GameObject clone = Instantiate(ScoreDisplayer, this.transform.position + new Vector3(-161,90 - 30*listTeam1.Count,0), this.transform.rotation);
+                GameObject clone = Instantiate(ScoreDisplayer, this.transform.position + new Vector3(-290,90 - 30*listTeam1.Count,0), this.transform.rotation);
                 clone.transform.SetParent(ScoreMenu.transform);
                 //clone.transform.position = Camera.main.WorldToViewportPoint(new Vector3(-181, 60 + 0, 0));
-                clone.GetComponent<Text>().text = NPChandler.GetComponent<NPCManager>().listNPCs[i].name;
-                listTeam1ScoreDisplayer.Add(clone);
                 
+                clone.GetComponent<Text>().text = NPChandler.GetComponent<NPCManager>().listNPCs[i].name;
+                listTeam1ScoreDisplayer.Add(clone);                
             }
             else
             {
                 listTeam2.Add(NPChandler.GetComponent<NPCManager>().listNPCs[i]);
-                GameObject clone = Instantiate(ScoreDisplayer, this.transform.position + new Vector3(161, 90 - 30 * listTeam2.Count, 0), this.transform.rotation);
+                GameObject clone = Instantiate(ScoreDisplayer, this.transform.position + new Vector3(290, 90 - 30 * listTeam2.Count, 0), this.transform.rotation);
                 clone.transform.SetParent(ScoreMenu.transform);
                 //clone.transform.position = new Vector3(92, 60 + 30 * listTeam2.Count, 0);
                 clone.GetComponent<Text>().text = NPChandler.GetComponent<NPCManager>().listNPCs[i].name;
                 listTeam2ScoreDisplayer.Add(clone);
             }
+        }
+
+        if (character.GetComponent<Attribute>().Team == Attribute.eTeam.Team1)
+        {
+            listTeam1.Add(character);
+            GameObject clone = Instantiate(ScoreDisplayer, this.transform.position + new Vector3(-290, 90 - 30 * listTeam1.Count, 0), this.transform.rotation);
+            clone.transform.SetParent(ScoreMenu.transform);
+            clone.GetComponent<Text>().text = character.GetComponent<Attribute>().name;
+            listTeam1ScoreDisplayer.Add(clone);
+        }
+        else
+        {
+            listTeam2.Add(character);
+            GameObject clone = Instantiate(ScoreDisplayer, this.transform.position + new Vector3(290, 90 - 30 * listTeam2.Count, 0), this.transform.rotation);
+            clone.transform.SetParent(ScoreMenu.transform);
+            clone.GetComponent<Text>().text = character.GetComponent<Attribute>().name;
+            listTeam2ScoreDisplayer.Add(clone);
         }
     }
 
@@ -62,6 +81,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (!bDisable)
         {
+            
             SortScore(listTeam1, listTeam1ScoreDisplayer);
             SortScore(listTeam2, listTeam2ScoreDisplayer);
         }

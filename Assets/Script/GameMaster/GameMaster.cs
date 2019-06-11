@@ -35,6 +35,7 @@ public class GameMaster : MonoBehaviour {
         if (GlobalControl.Instance != null)
         {
             modeDM.winScore = (int)GlobalControl.Instance.winKills;
+            character.GetComponent<Attribute>().Team = GlobalControl.Instance.bPlayerTeam1 ? Attribute.eTeam.Team1 : Attribute.eTeam.Team2;
         }
 
         if (gameMode == Mode.DeathMath)
