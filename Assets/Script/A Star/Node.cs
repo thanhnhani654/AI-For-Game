@@ -8,11 +8,14 @@ public class Node
     int hCost;
     int fCost;
 
+    // Tọa độ của node trong mảng
     public int posX;
     public int posY;
 
+    // Tọa độ của node.
     public Vector2 worldPos;
 
+    // Nhớ node trước đó dẫn tới nó
     public Node Parent;
 
     public bool IsWall;

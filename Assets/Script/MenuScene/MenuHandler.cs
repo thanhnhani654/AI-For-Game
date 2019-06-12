@@ -19,15 +19,9 @@ public class MenuHandler : MonoBehaviour
     public Button PlayerTeam;
     public Button mapLevel;
 
-    private void Start()
-    {
-        
-    }
-
     //Button Function
     public void NewGame()
     {
-        Debug.Log(Screen.width + " x " + Screen.height);
         ChonMap.SetActive(true);
         StartMenu.SetActive(false);
     }
@@ -55,7 +49,6 @@ public class MenuHandler : MonoBehaviour
 
         GlobalControl.Instance.winKills = winKills.value;
         GlobalControl.Instance.bFriendlyFire = bFriendlyFire;
-        //GlobalControl.Instance.bPlayerTeam1 = bPlayerTeam1;
         GlobalControl.Instance.level = level;
 
         Time.timeScale = 1;

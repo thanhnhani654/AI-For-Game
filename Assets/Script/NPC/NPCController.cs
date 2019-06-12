@@ -14,24 +14,36 @@ public class NPCController : MonoBehaviour {
 
     FieldOfView fow;
     NPCRotateToTarget npcRoTTarget;
+    // Tầm Nhìn của NPC
     public float radius = 3.0f;
     public LayerMask mask;
+
     public eNPCLevel level = eNPCLevel.Easy;
 
     //FireState
-    NPCFire npcFire;
+    NPCFire npcFire; // Hình như không dùng tới
+
+    // Thời gian chuyển trạng thái của NPC
     public float nextStateTime = 1.0f;
     float nextStateTimeCount;
+    // Dùng để chọn ngẫu nhiên hướng di chuyển cho trạng thái di chuyển lúc bắn của NPC
     public float randomRadius = 5;
-    public float randomRange = 1;
+
+    // Lưu trữ hướng di chuyển cho trạng thái di chuyển lúc bắn của NPC
     Vector3 directionMS;
+
     public LayerMask obstacleMask;
+    // Khoảng cách để NPC không tiến lại quá gần mục tiêu
     public float avoidTargetRadius = 5;
 
+    // True khi không tìm thấy mục tiêu trong trạng thái tìm mục tiêu
     bool lostTarget;
+    // True khi mục tiêu mất khỏi tầm nhìn và chuyển sang trạng thái tìm mục tiêu
     bool tempLostTarget;
+    // Thời gian để quyết định mất mục tiêu để quay về trạng thái Tìm kiếm 
     public float timeLostTarget = 5;
     public float timeLostTargetCount;
+    // Lưu trữ tọa độ lúc mục tiêu mất khỏi tầm nhìn
     Vector3 LostLocation;
 
     public eNPCState state = eNPCState.FollowPath;
@@ -43,12 +55,16 @@ public class NPCController : MonoBehaviour {
     public GameObject debugPointToGo;
     public bool debugPathFinding = true;
 
+    // Lưu trữ thông số NPC
     Attribute stat;
+    // True để Spawn lần đầu
     public bool directSpawn;
 
     public bool pause = false;
-    public Vector3 nextPosition;
-    public Vector3 velocity;
+    // Tọa độ xác định hướng nhìn của NPC. trong trường hợp NPC di chuyển không theo hướng
+    // nhìn thì là tọa độ của NPC trong frame kế tiếp
+    public Vector3 nextPosition;                                     
+    public Vector3 velocity;        // Hình như không dùng tới
     float speedScale;
 
     float countBugTime = 0;
@@ -93,7 +109,7 @@ public class NPCController : MonoBehaviour {
             tempLostTarget = true;
         }
 
-
+        // Khi vào trạng thái theo dấu mục tiêu(FollowTarget) thì bắt đầu đếm thời gian để quyết định mất dấu mục tiêu
         if (!lostTarget && tempLostTarget)
         {
             timeLostTargetCount -= Time.deltaTime;
@@ -103,6 +119,7 @@ public class NPCController : MonoBehaviour {
             lostTarget = true;
         ///////////////////////////////////////////
 
+        // Đoạn này chắc đọc code hiểu thoy
         switch (state)
         {
             case eNPCState.Idle:
@@ -179,7 +196,7 @@ public class NPCController : MonoBehaviour {
     {
         //Weapon
         npcRoTTarget.RotateToTarget();
-        //npcFire.Fire();
+        // Thực hiện việc bắn
         weapon.Fire();
 
 
@@ -206,7 +223,7 @@ public class NPCController : MonoBehaviour {
                 //    fireState = eNPCFireState.MoveToCoverPoint;              
 
                 break;
-            case eNPCFireState.MoveStraight:
+            case eNPCFireState.MoveStraight:        // Di chuyển theo hướng đã xác định
 
                 if (nextStateTimeCount < 0)
                 {
@@ -227,7 +244,8 @@ public class NPCController : MonoBehaviour {
                 }
 
                 break;
-            case eNPCFireState.MoveLR:
+              
+            case eNPCFireState.MoveLR:          // Xác định hướng ngẫu nhiên để di chuyển
 
                 if (nextStateTimeCount < 0)
                 {
@@ -272,6 +290,7 @@ public class NPCController : MonoBehaviour {
         }
     }
 
+    // Ráng làm cho lúc bắn nó ảo tí mà chưa được
     eNPCFireState RandomNextState()
     {
         int t = Random.Range(1, 3);
@@ -284,6 +303,7 @@ public class NPCController : MonoBehaviour {
         return (eNPCFireState)t;
     }
 
+    // Xác định hướng di chuyển lúc bắn
     void GetDirectionMS()
     {
         if (npcRoTTarget.target == null)
@@ -312,6 +332,7 @@ public class NPCController : MonoBehaviour {
         }
     }
 
+    // ReSpawn
     public bool ReSpawn()
     {
         if (stat == null)
@@ -342,7 +363,10 @@ public class NPCController : MonoBehaviour {
         return true;
     }
 
-    
+    // Thuật toán tránh va chạm 
+    // Tạo ra 3 ray bắn ra 3 hướng trước mặt
+    // 2 hướng left và right dùng để khi phát hiện trước mặt có tường hoặc npc thì nó né sang hướng còn lại
+    // ray ở giữa dùng để giảm tốc độ lại
     void ObstacleAvoidance()
     {
         Vector3 leftDirect = new Vector3(Vector3.up.x - 0.4f, Vector3.up.y, 0);
@@ -399,6 +423,7 @@ public class NPCController : MonoBehaviour {
         
     }
 
+    // Quyết định Team1 thì màu xanh, 2 thì đỏ, cầm súng gì thì hình ra sao
     void ChangeSprite(Weapon.eWeaponType type)
     {
         switch (type)

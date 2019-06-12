@@ -13,32 +13,36 @@ public class Grid : MonoBehaviour {
         public float height;
     }
 
+    // Danh sách các khu vực mà NPC có thể đi tới
     public List<SAreaMoveTo> listArea;
+    // Vị trí khu vực giữa 2 team ở trong mảng.
     public int centerAreaIndex;
+    // Lưu trữ riêng khu vực chính giữa 2 team
     SAreaMoveTo centerArea;
 
+    // Dùng để Debug kiểm tra các Node trên Editor
     public bool SeeNodeOnEditor = true;
 
+    // Lấy Prefap Node mẫu
     public GameObject NodePrefap;
+
     [Range(0,100)]
-    public int columns = 10;
+    public int columns = 10;    // Số lượng Node theo hàng ngang
     [Range(0,100)]
-    public int rows = 10;
+    public int rows = 10;       // Số lượng Node theo hàng dọc
     [Range(0,2)]
-    public float alignment = 2;
+    public float alignment = 2; // Khoảng cách giữa các Node
     [Range(0,2)]
-    public float nodeRadius = 0.5f;
+    public float nodeRadius = 0.5f;     // Bán kính của Node
 
-    private Node[,] nodeArrays;
-    private List<Node> path;
+    private Node[,] nodeArrays;     // Mảng Lưu trữ Node
+    private List<Node> path;        // Danh sách các Node của đường đi ngắn nhất
 
-    public LayerMask ObstacleMask;
+    public LayerMask ObstacleMask;  // Lưu trữ Layer của vật cản để xét các node nằm trong vật cản mà tránh
 
-    public bool debugFindPath = false;
-    public GameObject debugStartPoint;
-    public GameObject debugEndPoint;
-
-
+    public bool debugFindPath = false;  // Test Tìm đường
+    public GameObject debugStartPoint;  // Điểm bắt đầu test
+    public GameObject debugEndPoint;    // Điểm kết thúc
 
     void Start()
     {
@@ -50,12 +54,14 @@ public class Grid : MonoBehaviour {
 
                 nodeArrays[i, j].worldPos = new Vector2(this.transform.position.x + j * alignment, this.transform.position.y - i * alignment);
                 
+                // Node nào dính vào vật cản thì coi như node đó là tường
                 if (Physics2D.OverlapCircle(nodeArrays[i, j].worldPos,nodeRadius, ObstacleMask) != null)
                 {
                     nodeArrays[i, j].IsWall = true;
                 }
             }
 
+        // Lưu trữ riêng khu vực giữa 2 team nơi cả 2 team đều đi tới
         centerArea = listArea[centerAreaIndex];
     }
 
@@ -67,23 +73,29 @@ public class Grid : MonoBehaviour {
 
     }
 
+    // Tìm đường đi ngắn nhất với đầu vào là điểm bắt đầu và điểm kết thúc
     public List<Node> FindPath(Vector2 startPos, Vector2 endPos)
     {
-        //Node startNode = NodeFromWorldPos(startPos);
-        //Node endNode = NodeFromWorldPos(endPos);
+        // Khởi tạo danh sách các node của đường đi ngắn nhất (mới tạo dánh sách, chưa có gì hết)
         List<Node> finalPath = new List<Node>();
 
+        // Chuyển tọa độ của điểm bắt đầu và điểm kết thúc về 2 node gần nhất
         Node startNode = WorldPointToGrid(startPos);
         Node endNode = WorldPointToGrid(endPos);
 
+        // Khởi tạo danh sách chứa các node sẽ được xem xét tới để tìm đường đi ngắn nhất
         List<Node> OpenList = new List<Node>();
+        // Khởi tạo danh sách chứa các node không cần xem xét nữa
         HashSet<Node> ClosedList = new HashSet<Node>();
 
         OpenList.Add(startNode);
 
         int Count = 0;
 
-        while(OpenList.Count > 0)
+        // Từ đây làm lâu quá nên quên rồi :V
+        // Mà cũng vì vậy nên các hàm liên quan trong đây cũng cố xem tự hiểu tác dụng nhe :V
+        // Cố xem ở đây để hiểu: https://en.wikipedia.org/wiki/A*_search_algorithm
+        while (OpenList.Count > 0)
         {
             
             Count++;
@@ -215,6 +227,7 @@ public class Grid : MonoBehaviour {
         return nodeArrays[0, 0];
     }
 
+    // Chọn một khu vực ngẫu nhiên trong danh sách
     SAreaMoveTo GetRandomArea(Vector3 pos)
     {
         int rand = listArea.Count;
@@ -235,6 +248,7 @@ public class Grid : MonoBehaviour {
         return listArea[i];
     }
 
+    // Kiểm tra vị trí đó có nằm bên trong khu vực đó hay không
     bool IsInArea(Vector3 pos, SAreaMoveTo area)
     {
         if (pos.x < area.center.transform.position.x - area.width / 2 ||
@@ -245,6 +259,7 @@ public class Grid : MonoBehaviour {
         return true;
     }
 
+    // Lấy vị trí ngẫu nhiên trong khu vực
     public Vector2 GetRandomPositionInArea(SAreaMoveTo area)
     {
         float x = Random.Range(area.center.transform.position.x - area.width / 2, area.center.transform.position.x + area.width / 2);
@@ -253,11 +268,13 @@ public class Grid : MonoBehaviour {
         return new Vector2(x, y);
     }
 
+    // Lấy vị trí ngẫu nhiên trong khu vực ngẫu nhiên
     public Vector2 GetRandomPostion(Vector3 pos)
     {
         return GetRandomPositionInArea(GetRandomArea(pos));
     }
 
+    // Lấy vị trí ngẫy nhiên trong khu vực chính giữa
     public Vector2 GetRandomPositionInCenterArea()
     {
         float x = Random.Range(centerArea.center.transform.position.x - centerArea.width / 2, centerArea.center.transform.position.x + centerArea.width / 2);
